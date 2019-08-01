@@ -1,0 +1,8 @@
+{
+    "appPort":8000,
+    "database":{
+		"databaseName": "company",
+        "hostName": "localhost",
+        "port": 27017
+    }
+}
