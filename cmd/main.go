@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"time"
 	"user-api/internal/config"
-	"user-api/internal/routes"
+	"user-api/internal/routes/getuser"
+	"user-api/internal/routes/insertuser"
+	"user-api/internal/routes/updateuser"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,7 +29,8 @@ func main() {
 	//fmt.Println("My Configuration details:", con)
 	router := mux.NewRouter()
 	//	subpath := router.PathPrefix("/v1")
-	router.HandleFunc("/insertuser", routes.CreateNewUser(client)).Methods(http.MethodPost)
-	//router.HandleFunc("/getuser", GetUser).Methods("GET")
+	router.HandleFunc("/insertuser", insertuser.CreateNewUser(client)).Methods(http.MethodPost)
+	router.HandleFunc("/getuser/{id}", getuser.GetUserEndpoint(client)).Methods(http.MethodGet)
+	router.HandleFunc("/updateuser", updateuser.UpdateUser(client)).Methods(http.MethodPut)
 	http.ListenAndServe(":8000", router)
 }

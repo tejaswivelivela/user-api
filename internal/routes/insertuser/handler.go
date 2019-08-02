@@ -1,4 +1,4 @@
-package routes
+package insertuser
 
 import (
 	"context"
